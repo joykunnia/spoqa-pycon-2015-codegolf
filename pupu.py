@@ -1,7 +1,9 @@
 from __future__ import print_function
 
+import sys
+
 def draw_pupu():
-    print("""
+    return("""
                                                    *******
                                                   **********
                                                  ***********
@@ -46,6 +48,44 @@ def draw_pupu():
                 ***************************************
 """)
 
+def print_pupu(pupu):
+    list=[]
+    for ar in pupu:
+        line = []
+
+        if len(ar) > 0:
+            prev = ar[0]
+            cnt =0
+            for c in ar:
+                if c == prev :
+                    cnt += 1
+                else :
+                    temp = [prev,cnt]
+                    line.append(temp)
+                    cnt = 1
+                prev = c
+
+            temp = [prev,cnt]
+        else :
+            temp = ["""\r""",1]
+
+        line.append(temp)
+        list.append(line)
+
+    for line in list:
+        str = ''
+        for temp in line:
+            text = temp[0]
+            loop_cnt = temp[1]
+            cnt = 0
+            str_list=[]
+            while loop_cnt > cnt :
+                str_list.append(text)
+                cnt += 1
+
+            sys.stdout.write("""""".join(str_list))
+        print('')
+
 
 if __name__ == '__main__':
-    draw_pupu()
+    print_pupu(draw_pupu().split('\r'))
